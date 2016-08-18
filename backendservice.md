@@ -56,3 +56,8 @@ class Greeter {
 	}
 }
 ```
+
+```bash
+./mvnw clean package
+cf push
+```
