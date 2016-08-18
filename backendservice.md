@@ -69,10 +69,10 @@ applications:
   path: target/demo-0.0.1-SNAPSHOT.jar
 ```
 
+## アプリケーションのプッシュ
 ```bash
-$ ./mvnw clean package
+$ ./mvnw clean package -DskipTests=true
 ```
-
 まだRedisがサービスとしてアタッチされていないため--no-startオプションを付与し、アプリケーションをPCF上へアップロードします。
 ```bash
 $ cf push --no-start
@@ -129,7 +129,7 @@ JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}' の設定をした状�
 #spring.redis.password=${vcap.services.redis-caching.credentials.password}
 ```
 ```bash
-$ ./mvnw clean package
+$ ./mvnw clean package -DskipTests=true
 ```
 ```bash
 $ cf push
