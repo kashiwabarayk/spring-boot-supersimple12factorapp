@@ -91,6 +91,10 @@ spring.redis.host=${vcap.services.redis-caching.credentials.host}
 spring.redis.port=${vcap.services.redis-caching.credentials.port}
 spring.redis.password=${vcap.services.redis-caching.credentials.password}
 ```
-
 ```bash
+$ cf set-env myapp-<name> JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}'
+$ cf set-env myapp-<name> SPRING_PROFILES_ACTIVE cloud # Auto 
+$ cf restart myapp-<name>
 ```
+
+
