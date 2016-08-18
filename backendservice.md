@@ -82,5 +82,15 @@ $ cf bind-service myapp-<name> redis caching
 $ cf env myapp-<name>
 ```
 ```bash
-$ cf restart myapp-<name>
+$ cf start myapp-<name>
+```
 
+## Auto-configrationを利用しない方法
+```properties
+spring.redis.host=${vcap.services.redis-caching.credentials.host}
+spring.redis.port=${vcap.services.redis-caching.credentials.port}
+spring.redis.password=${vcap.services.redis-caching.credentials.password}
+```
+
+```bash
+```
