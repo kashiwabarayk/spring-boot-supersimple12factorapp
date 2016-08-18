@@ -14,6 +14,18 @@ git clone https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp.gi
 cd initial/pcfsample-initial
 ```
 
+pom.xmlに以下の依存関係を追加します。
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-cache</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-redis</artifactId>
+</dependency>
+```
+
 PcfsampleappApplication.javaを以下のように編集します。
 ```java
 @SpringBootApplication
