@@ -57,7 +57,30 @@ class Greeter {
 }
 ```
 
+```yml
+---
+applications:
+- name: myapp-<name> #自分の名前を記入
+  memory: 512M
+  instances: 1
+  path: target/demo-0.0.1-SNAPSHOT.jar
+```
+
 ```bash
 $ ./mvnw clean package
-$ cf push
+$ cf push --no-start
 ```
+
+## Redisサービスの作成とBind
+```bash
+$ cf create-service p-redis redis-caching
+```
+```bash
+$ cf bind-service myapp-<name> redis caching
+```
+```bash
+$ cf env myapp-<name>
+```
+```bash
+$ cf restart myapp-<name>
+
