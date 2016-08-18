@@ -8,10 +8,10 @@
 ## 準備
 以下のコマンドで本プロジェクトをコピーします。
 ```bash
-git clone https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp.git
+$ git clone https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp.git
 ```
 ```bash
-cd initial/pcfsample-initial
+$ cd initial/pcfsample-initial
 ```
 
 ## プロジェクトの編集
@@ -58,6 +58,6 @@ class Greeter {
 ```
 
 ```bash
-./mvnw clean package
-cf push
+$ ./mvnw clean package
+$ cf push
 ```
