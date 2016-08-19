@@ -100,11 +100,17 @@ cf envコマンドを叩くことでBindされたRedisの情報を確認でき�
 $ cf env myapp-<name>
 ```
 上記のようにBindされたRedisインスタンスの情報はアプリケーションの環境変数として取得できます。
-Bindされたのでアプリケーションを起動します。この環境変数はアプリケーション起動時に取得されます。
+Bindされたのでアプリケーションを起動します。
+この環境変数はアプリケーション起動時に取得されます。
 ```bash
 $ cf start myapp-<name>
 ```
-＜追記予定＞
+## テスト
+```bash
+$ curl curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io
+
+Hello. It's 2016-08-15T08:46:16.745Z now.
+```
 
 ## Auto-configrationを利用しない方法
 Auto Configuration機能を利用せずに明示的に環境変数から取得することも可能です。
