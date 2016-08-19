@@ -122,11 +122,27 @@ Removed sessions
 
 ## サービスをunbindした場合
 サービスをunbindし、セッション情報がローカルのメモリに格納されているパターンの動作も確認してみましょう。
+以下の行をコメントアウトします。
+`PcfsampleappApplication`クラス
 ```java
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
 //@EnableRedisHttpSession
 ```
+`HttpSessionConfig`クラス
+```java
+//@EnableRedisHttpSession
+//@Configuration
+public class HttpSessionConfig {
+//	@Bean
+//    public static ConfigureRedisAction configureRedisAction() {
+//        return ConfigureRedisAction.NO_OP;
+//    }
+}
+```
+
 ```bash
-$ cf./mvnw clean package -DskipTests=true
+$ cf ./mvnw clean package -DskipTests=true
 $ cf push
 ```
 ```bash
