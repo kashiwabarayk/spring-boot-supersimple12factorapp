@@ -10,9 +10,7 @@ Spring Bootのロガーの機能はすでに追加してあるspring-boot-starte
 ```java
 public class PcfsampleappApplication {
 	private static final Logger logger = LoggerFactory.getLogger(PcfsampleappApplication.class);
-	
-	~~~~~
-	
+// . . . 
 ```
 
 ```java
