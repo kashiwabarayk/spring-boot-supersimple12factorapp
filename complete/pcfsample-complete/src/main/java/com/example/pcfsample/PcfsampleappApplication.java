@@ -11,7 +11,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.cache.annotation.EnableCaching;
-import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+//import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @SpringBootApplication
 @RestController
 @EnableCaching
-@EnableRedisHttpSession
+//@EnableRedisHttpSession
 public class PcfsampleappApplication {
 	private static final Logger logger = LoggerFactory.getLogger(PcfsampleappApplication.class);
 
@@ -40,7 +40,7 @@ public class PcfsampleappApplication {
 
 	@RequestMapping("/put")
 	String putSession(HttpSession session) {
-		session.setAttribute("username", "tkaburagi");
+		session.setAttribute("username", "tkaburagi " + OffsetDateTime.now());
 		return "Generated a session";
 	}
 
