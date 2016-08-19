@@ -140,6 +140,16 @@ public class HttpSessionConfig {
 //    }
 }
 ```
+```xml
+<!-- <dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-data-redis</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.springframework.session</groupId>
+	<artifactId>spring-session</artifactId>
+</dependency> -->
+```
 
 ```bash
 $ cf ./mvnw clean package -DskipTests=true
