@@ -20,8 +20,7 @@ Spring BootとPivotal Cloud Foundryの機能を使ってとてもシンプルな
 * cf cliのインストール
 
 # ハンズオン手順
-1. [シンプルなアプリケーションをデプロイする](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/deploy.md)
-2. [バックエンドサービスを利用する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/backendservice.md)
-3. [HTTPセッションを外部に格納する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/stateless.md)
-4. [ログをストリーミングイベントとして扱う](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/logstreaming.md)
-5. [Blue Greenデプロイする](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/bgdeploy.md)
+1. [バックエンドサービスを利用する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/backendservice.md)
+2. [HTTPセッションを外部に格納する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/stateless.md)
+3. [ログをストリーミングイベントとして扱う](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/logstreaming.md)
+4. [Blue Greenデプロイする](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/bgdeploy.md)
