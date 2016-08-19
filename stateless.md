@@ -92,11 +92,11 @@ tkaburagi%
 ```
 セッション情報を取得できました。これがRedisに格納されていることを確認するためにアプリケーションを停止させます。
 ```bash
-curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/kill
-curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/kill
+$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 404 Not Found: Requested route ('myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io') does not exist.
 ```
-このコマンドで`System.exit(-1)`が実行されJVMが停止します。
+`System.exit(-1)`が実行されJVMが停止します。
 PCFのコンテナリカバリ機能によってアプリケーションが自動再起動されますのでしばらくしたら以下のコマンドを実行します。
 ```bash
 $ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
