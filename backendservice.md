@@ -60,10 +60,13 @@ class Greeter {
 ```
 @EnableCachingアノテーションによってキャッシュ機能を有効化します。また@Cacheableによりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
+次に、PCFにデプロイするためのアプリケーションの定義情報を記入します。
+
 ```yml
 ---
 applications:
 - name: myapp-<name> #自分の名前を記入
+  host: myapp-<name> #自分の名前を記入
   memory: 512M
   instances: 1
   path: target/demo-0.0.1-SNAPSHOT.jar
