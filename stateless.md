@@ -159,3 +159,5 @@ $ cf push
 $ cf unbind-service myapp-tkaburagi redis-session
 $ cf restage myapp-tkaburagi
 ```
+Webブラウザから`put->get->kill->get`の順番でAPIを叩いてください。
+killでローカルのセッション情報が消えるため、2回目のgetでエラーが発生します。
