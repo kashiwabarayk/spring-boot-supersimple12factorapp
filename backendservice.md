@@ -107,73 +107,9 @@ $ cf start myapp-<name>
 ```
 ## テスト
 ```bash
-$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io
+$ curl curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io
 
 Hello. It's 2016-08-15T08:46:16.745Z now.
-```
-再度アクセスすると同じタイムスタンプの結果が表示されるため、キャッシュされたデータが取得されていることがわかります。
-ここでは、Redisに関する設定を全く行いませんでしたが、何が起きているのでしょうか。ログを見てみましょう。
-
-``` console
-$ cf logs hello-redis-tmaki --recent
-```
-
-``` console
-2016-03-17T22:19:50.04+0900 [APP/0]      OUT 2016-03-17 13:19:50.044  INFO 14 --- [           main] urceCloudServiceBeanFactoryPostProcessor : Auto-reconfiguring beans of type javax.sql.DataSource
-2016-03-17T22:19:50.04+0900 [APP/0]      OUT 2016-03-17 13:19:50.047  INFO 14 --- [           main] urceCloudServiceBeanFactoryPostProcessor : No beans of type javax.sql.DataSource found. Skipping auto-reconfiguration.
-2016-03-17T22:19:50.05+0900 [APP/0]      OUT 2016-03-17 13:19:50.051  INFO 14 --- [           main] edisCloudServiceBeanFactoryPostProcessor : Auto-reconfiguring beans of type org.springframework.data.redis.connection.RedisConnectionFactory
-2016-03-17T22:19:50.11+0900 [APP/0]      OUT 2016-03-17 13:19:50.113  INFO 14 --- [           main] edisCloudServiceBeanFactoryPostProcessor : Reconfigured bean redisConnectionFactory into singleton service connector org.springframework.data.redis.connection.jedis.JedisConnectionFactory@51b6a3e3
-```
-
-`Reconfigured bean redisConnectionFactory`というメッセージが見えます。Java Buildpackに含まれるAuto Reconfigureという仕組みによって、サービスインスタンスのRedis情報から`RedisConnectionFactory` Beanを差し替えています。
-これにより、アプリケーション側で特別な設定をすることなくCloud Foundry上でサービスインスタンスにアクセスすることができます。
-ローカル開発時にローカル用Redisにアクセスする設定を行っている場合も、そのままCloud Foundryにデプロイして構いません。
-
-Auto Reconfigureは**Springアプリケーション(とPlayアプリケーション)をデプロイした場合のみ有効**となる機能です。
-[ドキュメント](https://github.com/cloudfoundry/java-buildpack-auto-reconfiguration#what-is-auto-reconfiguration)に記載されている通り、次のクラスのBeanが置換対象です。
-
-* `javax.sql.DataSource`
-* `org.springframework.amqp.rabbit.connection.ConnectionFactory`
-* `org.springframework.data.mongodb.MongoDbFactory`
-* `org.springframework.data.redis.connection.RedisConnectionFactory`
-* `org.springframework.orm.hibernate3.AbstractSessionFactoryBean`
-* `org.springframework.orm.hibernate4.LocalSessionFactoryBean`
-* `org.springframework.orm.jpa.AbstractEntityManagerFactoryBean`
-
-JSON内の`tags`の値やURLスキームを確認しています。
-
-ただし、対象のBeanが複数定義ある場合(2つの`DataSource`など)や異なる同種サービスを同時に使う場合（MySQLとPostgreSQLなど）は、Beanの差し替えは発生しません。
-
-Cloud Foundry (BuildPackの設定)でBeanのAuto Reconfigureされることにより接続先の情報が自動で設定され、今回のアプリケーションで使用しているSpring BootのAuto ConfigureによってRedisのキャッシュを使うための設定が自動化されています。
-
-Spring Boot以外のアプリケーションを作成する場合は、環境変数`VCAP_SERVICES`に設定されているJSONをパースして接続先情報を取得します。`VCAP_SERVICES`の例を以下に示します。
-
-``` json
-{
-  "rediscloud": [
-   {
-    "credentials": {
-     "hostname": "pub-redis-13677.us-east-1-2.4.ec2.garantiadata.com",
-     "password": "ChZds5T8YWxrK5Jx",
-     "port": "13677"
-    },
-    "label": "rediscloud",
-    "name": "myredis",
-    "plan": "30mb",
-    "provider": null,
-    "syslog_drain_url": null,
-    "tags": [
-     "Data Stores",
-     "Data Store",
-     "Caching",
-     "Messaging and Queuing",
-     "key-value",
-     "caching",
-     "redis"
-    ]
-   }
-  ]
- }
 ```
 
 ## Auto-configrationを利用しない方法
@@ -184,6 +120,8 @@ Auto Configuration機能を利用せずに明示的に環境変数から取得�
 $ cf set-env myapp-<name> JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}'
 $ cf set-env myapp-<name> SPRING_PROFILES_ACTIVE cloud # Auto 
 ```
+
+Auto confgrationがオフになると設定ファイルから接続情報が取得されます。
 
 環境変数を読み込むための設定をapplication.propertiesファイルに記載します。
 これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
