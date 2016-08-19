@@ -60,7 +60,7 @@ class Greeter {
 	}
 }
 ```
-@EnableCachingアノテーションによってキャッシュ機能を有効化します。また、@Cacheableによりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
+`@EnableCaching`アノテーションによってキャッシュ機能を有効化します。また、`@Cacheable`によりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
 次に、PCFにデプロイするためのアプリケーションの定義情報を記入します。
 
@@ -78,7 +78,7 @@ applications:
 ```bash
 $ ./mvnw clean package -DskipTests=true
 ```
-まだRedisがサービスとしてアタッチされていないため--no-startオプションを付与し、アプリケーションをPCF上へアップロードします。
+まだRedisがサービスとしてアタッチされていないため`--no-start`オプションを付与し、アプリケーションをPCF上へアップロードします。
 ```bash
 $ cf push --no-start
 ```
@@ -117,7 +117,7 @@ Hello. It's 2016-08-15T08:46:16.745Z now.
 ここでは、Redisに関する設定を全く行いませんでしたが、何が起きているのでしょうか。ログを見てみましょう。
 
 ``` console
-$ cf logs hello-redis-tmaki --recent
+$ cf logs myapp-<name> --recent
 ```
 
 ``` console
@@ -190,7 +190,7 @@ $ cf set-env myapp-<name> SPRING_PROFILES_ACTIVE cloud # Auto
 
 Auto confgrationがオフになると設定ファイルから接続情報が取得されます。
 
-環境変数を読み込むための設定をapplication.propertiesファイルに記載します。
+環境変数を読み込むための設定を`application.properties`ファイルに記載します。
 これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
 ```properties
 spring.redis.host=${vcap.services.redis-caching.credentials.host}
@@ -207,7 +207,7 @@ $ cf push
 同じようにAPIにアクセスしてみましょう。
 
 ## 念のため確認
-JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}' の設定をした状態でapplication.propertiesの接続情報を削除し、ビルド→プッシュしてみましょう。
+`JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}'` の設定をした状態で`application.properties`の接続情報を削除し、ビルド→プッシュしてみましょう。
 ```properties
 #spring.redis.host=${vcap.services.redis-caching.credentials.host}
 #spring.redis.port=${vcap.services.redis-caching.credentials.port}
@@ -219,5 +219,5 @@ $ ./mvnw clean package -DskipTests=true
 ```bash
 $ cf push
 ```
-デフォルトではlocalhostのRedisサーバにアクセスを試行するため、設定ファイルなしだとアプリケーションの起動に失敗します。
+デフォルトでは`localhost`のRedisサーバにアクセスを試行するため、設定ファイルなしだとアプリケーションの起動に失敗します。
 設定ファイルの環境変数から取得した値が利用されていることがわかります。
