@@ -121,7 +121,7 @@ Session: tkaburagi 2016-08-19T08:57:16.411Z
 cf unmap-route myapp-tkaburagi cfapps.haas-42.pez.pivotal.io --hostname myapp-tkaburagi
 ```
 curlで毎秒アクセスしている端末の出力結果を確認します。
-```
+```console
 Version: 2.
 Java Version: 1.8.0_91
 Session: tkaburagi 2016-08-19T08:57:16.411Z
