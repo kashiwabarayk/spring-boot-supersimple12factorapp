@@ -1,10 +1,10 @@
 package com.example.pcfsample;
 
-//@EnableRedisHttpSession
-//@Configuration
+@EnableRedisHttpSession
+@Configuration
 public class HttpSessionConfig {
-//	@Bean
-//    public static ConfigureRedisAction configureRedisAction() {
-//        return ConfigureRedisAction.NO_OP;
-//    }
+	@Bean
+    public static ConfigureRedisAction configureRedisAction() {
+        return ConfigureRedisAction.NO_OP;
+    }
 }
