@@ -81,3 +81,5 @@ $ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/logger
 Output logs%
 ```
 
+Papertrailのダッシュボードにログが表示されていることを確認します。
+![image](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/Screen%20Shot%202016-08-19%20at%204.49.40%20PM.png)
