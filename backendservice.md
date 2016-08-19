@@ -5,7 +5,8 @@
 * バックエンドサービス
 * 開発/本番一致
 
-ここではPCFのBindの機能とSpring Bootのspring-boot-starter-redisを利用してバックエンドのサービスをアタッチ(Bind)されたリソースとして扱います。これによってソースコードや設定ファイルに接続情報等をコーディングすることなく取得できます。設定を外部から読み込むことで本番環境、開発環境やマルチクラウドに対して可搬的なアプリケーションとなります。
+ここではPCFのBindの機能とSpring Bootのspring-boot-starter-redisを利用してバックエンドのサービスをアタッチ(Bind)されたリソースとして扱います。これによってソースコードや設定ファイルに接続情報等をコーディングすることなく取得できます。
+設定を外部から読み込むことで本番環境、開発環境やクラウドに対して可搬的なアプリケーションとなります。
 
 ## 準備
 以下のコマンドで本プロジェクトをコピーします。
@@ -17,7 +18,8 @@ $ cd initial/pcfsample-initial
 ```
 
 ## プロジェクトの編集
-pom.xmlに以下の依存関係を追加します。12 Factorでは依存関係はMavenやGradleなどを利用して明記しライブラリを取り込みます。ここではRedisにデータをキャッシュするために必要なライブラリを指定します。
+pom.xmlに以下の依存関係を追加します。12 Factorでは依存関係はMavenやGradleなどを利用して明記しライブラリを取り込みます。
+ここではRedisにデータをキャッシュするために必要なライブラリを指定します。
 ```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -58,7 +60,7 @@ class Greeter {
 	}
 }
 ```
-@EnableCachingアノテーションによってキャッシュ機能を有効化します。また@Cacheableによりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
+@EnableCachingアノテーションによってキャッシュ機能を有効化します。また、@Cacheableによりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
 次に、PCFにデプロイするためのアプリケーションの定義情報を記入します。
 
@@ -87,6 +89,7 @@ $ cf push --no-start
 $ cf create-service p-redis redis-caching
 ```
 このコマンドにより自分用のRedisインスタンスがPCFによって払い出されます。
+
 次に払い出されたインスタンスをアプリケーションにBindします。
 ```bash
 $ cf bind-service myapp-<name> redis-caching
@@ -96,20 +99,24 @@ cf envコマンドを叩くことでBindされたRedisの情報を確認でき�
 ```bash
 $ cf env myapp-<name>
 ```
-上記のようにBindされたRedisインスタンスの情報はアプリケーションの環境変数として取得できます。Bindされたのでアプリケーションを起動します。この環境変数はアプリケーション起動時に取得されます。
+上記のようにBindされたRedisインスタンスの情報はアプリケーションの環境変数として取得できます。
+Bindされたのでアプリケーションを起動します。この環境変数はアプリケーション起動時に取得されます。
 ```bash
 $ cf start myapp-<name>
 ```
 ＜追記予定＞
 
 ## Auto-configrationを利用しない方法
-Auto Configuration機能を利用せずに明示的に環境変数から取得することも可能です。まず、以下のコマンドでAuto configration機能をオフにします。
+Auto Configuration機能を利用せずに明示的に環境変数から取得することも可能です。
+
+まず、以下のコマンドでAuto configration機能をオフにします。
 ```bash
 $ cf set-env myapp-<name> JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}'
 $ cf set-env myapp-<name> SPRING_PROFILES_ACTIVE cloud # Auto 
 ```
 
-環境変数を読み込むための設定をapplication.propertiesファイルに記載します。これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
+環境変数を読み込むための設定をapplication.propertiesファイルに記載します。
+これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
 ```properties
 spring.redis.host=${vcap.services.redis-caching.credentials.host}
 spring.redis.port=${vcap.services.redis-caching.credentials.port}
