@@ -38,6 +38,17 @@ String getSession(HttpSession session) {
 ```
 `<name>`に任意の名前を入力してください。
 
+また、以下のアノテーションを付与します。
+```java
+@SpringBootApplication
+@RestController
+@EnableCaching
+@EnableRedisHttpSession
+public class PcfsampleappApplication {
+// . . . 
+```
+`@EnableRedisHttpSession`によってセッションがRedisに格納されます。
+
 ## アプリケーションのプッシュ
 ```bash
 $ ./mvnw clean package
@@ -88,7 +99,7 @@ curl -vvv -X PUT http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/put
 Generated a session%
 
 $ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
-tkaburagi%
+tkaburagi 2016-08-19T05:26:41.478Z%
 ```
 セッション情報を取得できました。これがRedisに格納されていることを確認するためにアプリケーションを停止させます。
 ```bash
@@ -100,7 +111,7 @@ $ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c8368
 PCFのコンテナリカバリ機能によってアプリケーションが自動再起動されますのでしばらくしたら以下のコマンドを実行します。
 ```bash
 $ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
-tkaburagi%
+tkaburagi 2016-08-19T05:26:41.478Z%
 ```
 再起動後もセッション情報が取得され、ローカルではなく外部にセッションが格納されていることがわかります。
 セッションを削除して再度試したい時は以下のコマンドを実行してください。
@@ -111,4 +122,14 @@ Removed sessions
 
 ## サービスをunbindした場合
 サービスをunbindし、セッション情報がローカルのメモリに格納されているパターンの動作も確認してみましょう。
-＜後で追加＞
+```java
+//@EnableRedisHttpSession
+```
+```bash
+$ cf./mvnw clean package -DskipTests=true
+$ cf push
+```
+```bash
+$ cf unbind-service myapp-tkaburagi redis-session
+$ cf restage myapp-tkaburagi
+```
