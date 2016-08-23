@@ -62,6 +62,18 @@ class Greeter {
 ```
 `@EnableCaching`アノテーションによってキャッシュ機能を有効化します。また、`@Cacheable`によりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
+また、以下のクラスを追加してください。PCFやAWSのRedisでは起動時に実行される幾つかのコマンドが向こうになっているため、それを実行しないようにコンフィグレーションのBeanを追加します。
+```java
+@EnableRedisHttpSession
+@Configuration
+public class HttpSessionConfig {
+  @Bean
+    public static ConfigureRedisAction configureRedisAction() {
+        return ConfigureRedisAction.NO_OP;
+    }
+}
+```
+
 次に、PCFにデプロイするためのアプリケーションの定義情報を記入します。
 
 ```yml
