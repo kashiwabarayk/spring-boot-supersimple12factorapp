@@ -58,7 +58,7 @@ $ cf push --nostart
 ## Redisインスタンスの作成とBind
 先ほどと同様にRedisインスタンスを作成し、アプリケーションにBindします。
 ```bash
-$ cf create-service p-redis redis-session
+$ cf create-service p-redis shared-vm redis-session
 $ cf bind-service myapp-<name> redis-session
 $ cf env myapp-<name>
 $ cf start myapp-<name>
