@@ -18,6 +18,7 @@ $ cd initial/pcfsample-initial
 ```
 
 ## プロジェクトの編集
+※IDEにMavenプロジェクトとしてインポートしてしまうと便利です。
 pom.xmlに以下の依存関係を追加します。12 Factorでは依存関係はMavenやGradleなどを利用して明記しライブラリを取り込みます。
 ここではRedisにデータをキャッシュするために必要なライブラリを指定します。
 ```xml
