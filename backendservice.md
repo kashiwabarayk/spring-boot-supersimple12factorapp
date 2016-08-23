@@ -88,7 +88,7 @@ applications:
 
 ## アプリケーションのプッシュ
 ```bash
-$ ./mvnw clean package -DskipTests=true
+$ mvn clean package -DskipTests=true
 ```
 まだRedisがサービスとしてアタッチされていないため`--no-start`オプションを付与し、アプリケーションをPCF上へアップロードします。
 ```bash
