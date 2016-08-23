@@ -25,7 +25,7 @@ Spring Bootではデフォルトで標準出力にログを出力します。
 
 ## アプリケーションのプッシュ
 ```bash
-$ ./mvnw clean package
+$ mvn clean package -DskipTests=true
 $ cf push
 ```
 
