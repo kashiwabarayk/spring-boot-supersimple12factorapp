@@ -234,7 +234,7 @@ $ cf push
 #spring.redis.password=${vcap.services.redis-caching.credentials.password}
 ```
 ```bash
-$ ./mvnw clean package -DskipTests=true
+$ mvn clean package -DskipTests=true
 ```
 ```bash
 $ cf push
