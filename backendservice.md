@@ -218,7 +218,7 @@ spring.redis.port=${vcap.services.redis-caching.credentials.port}
 spring.redis.password=${vcap.services.redis-caching.credentials.password}
 ```
 ```bash
-$ ./mvnw clean package
+$ mvn clean package -DskipTests=true
 ```
 ```bash
 $ cf push
