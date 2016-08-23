@@ -116,8 +116,57 @@ $ cf bind-service myapp-<name> redis-caching
 ```
 
 cf envコマンドを叩くことでBindされたRedisの情報を確認できます。
-```bash
+```console
 $ cf env myapp-<name>
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "p-redis": [
+   {
+    "credentials": {
+     "host": "10.65.202.115",
+     "password": "f73b0ff4-6762-44d7-ac30-1af6f9ebef5b",
+     "port": 33992
+    },
+    "label": "p-redis",
+    "name": "redis-caching",
+    "plan": "shared-vm",
+    "provider": null,
+    "syslog_drain_url": null,
+    "tags": [
+     "pivotal",
+     "redis"
+    ]
+   }
+  ]
+ }
+}
+
+{
+ "VCAP_APPLICATION": {
+  "application_id": "66bcd390-37ff-4522-a14f-8e49ad608210",
+  "application_name": "myapp-tkaburagi",
+  "application_uris": [
+   "myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io"
+  ],
+  "application_version": "d410fee2-b56e-41fa-9393-5ef7c5e561cd",
+  "limits": {
+   "disk": 1024,
+   "fds": 16384,
+   "mem": 512
+  },
+  "name": "myapp-tkaburagi,
+  "space_id": "3bf40a1f-2afe-4fd1-8a7e-8b8c902ae1c3",
+  "space_name": "development",
+  "uris": [
+   "myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io"
+  ],
+  "users": null,
+  "version": "d410fee2-b56e-41fa-9393-5ef7c5e561cd"
+ }
+}
+
 ```
 上記のようにBindされたRedisインスタンスの情報はアプリケーションの環境変数として取得できます。
 Bindされたのでアプリケーションを起動します。
