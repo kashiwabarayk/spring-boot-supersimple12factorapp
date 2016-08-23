@@ -18,7 +18,7 @@ String bgdemo(HttpSession session) {
 
 ## アプリケーションのプッシュ
 ```bash
-$ ./mvnw clean package -DskipTests=true
+$ mvn clean package -DskipTests=true
 $ cf push
 ```
 
