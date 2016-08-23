@@ -35,6 +35,19 @@ pom.xmlに以下の依存関係を追加します。12 Factorでは依存関係�
 
 次に、PcfsampleappApplication.javaを以下のように編集します。
 ```java
+package com.example.pcfsample;
+
+import java.time.OffsetDateTime;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 @SpringBootApplication
 @RestController
 @EnableCaching
@@ -54,6 +67,10 @@ public class PcfsampleappApplication {
 		return "Killed";
 	}
 
+	public static void main(String[] args) {
+		SpringApplication.run(PcfsampleappApplication.class, args);
+	}
+
 	@Component
 	class Greeter {
 		@Cacheable("hello")
@@ -62,7 +79,6 @@ public class PcfsampleappApplication {
 		}
 	}
 }
-
 ```
 `@EnableCaching`アノテーションによってキャッシュ機能を有効化します。また、`@Cacheable`によりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
