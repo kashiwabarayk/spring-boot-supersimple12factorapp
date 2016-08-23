@@ -106,7 +106,7 @@ $ cf push --no-start
 ## Redisインスタンスの作成とBind
 ここではデータのキャッシュ先として利用するRedisインスタンスの作成し、そのインスタンスをアプリケーションにアタッチ(Bind)します。
 ```bash
-$ cf create-service p-redis redis-caching
+$ cf create-service p-redis shared-vm redis-caching
 ```
 このコマンドにより自分用のRedisインスタンスがPCFによって払い出されます。
 
