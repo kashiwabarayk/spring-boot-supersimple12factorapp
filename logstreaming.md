@@ -31,7 +31,7 @@ $ cf push
 
 ## ログの確認
 ```bash
-$ cf log myapp-<name>
+$ cf logs myapp-<name>
 ```
 別の端末を立ち上げ、以下のコマンドを実行します。
 ```bash
