@@ -54,13 +54,15 @@ public class PcfsampleappApplication {
 		return "Killed";
 	}
 
-@Component
-class Greeter {
-	@Cacheable("hello")
-	public String hello() {
-		return "Hello. It's " + OffsetDateTime.now() + " now.";
+	@Component
+	class Greeter {
+		@Cacheable("hello")
+		public String hello() {
+			return "Hello. It's " + OffsetDateTime.now() + " now.";
+		}
 	}
 }
+
 ```
 `@EnableCaching`アノテーションによってキャッシュ機能を有効化します。また、`@Cacheable`によりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
