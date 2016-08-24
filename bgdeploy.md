@@ -61,7 +61,7 @@ $ while true; do curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/bgdem
 	return "Version: 2." + sep
 ```
 ```bash
-$ ./mvnw clean package -DskipTests=true
+$ mvn clean package -DskipTests=true
 ```
 `application.yml`を以下のように編集します。
 ```yml
