@@ -152,7 +152,7 @@ public class HttpSessionConfig {
 ```
 
 ```bash
-$ cf ./mvnw clean package -DskipTests=true
+$ cf mvn clean package -DskipTests=true
 $ cf push
 ```
 ```bash
