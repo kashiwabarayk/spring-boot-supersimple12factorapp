@@ -83,7 +83,7 @@ $ cf push
 ## 新しいアプリケーションの確認
 起動をしたら以下のコマンドで動作を確認します。
 ```bash
-$ curl http://myapp-tkaburagi-temp.cfapps.haas-42.pez.pivotal.io/bgdemo -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
+$ curl http://myapp-tkaburagi-temp.cfapps.haas-42.pez.pivotal.io/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
 Version: 2.
 Java Version: 1.8.0_91
 Session: tkaburagi 2016-08-19T08:11:46.857Z%
