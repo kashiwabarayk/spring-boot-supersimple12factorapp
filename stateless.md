@@ -49,6 +49,20 @@ public class PcfsampleappApplication {
 ```
 `@EnableRedisHttpSession`によってセッションがRedisに格納されます。
 
+次に以下のHttpSessionConfigクラスを作成します。
+Spring SessionはRedisのconfigコマンドを使って初期化時にRedisの再設定を行いますが、PCFやAWSのRedisではconfigコマンドが無効化されていてエラーになってしまいます。そのため、Spring SessionがRedisのCONFIGを実行しないようコンフィグレーションを作成します。
+```java
+@EnableRedisHttpSession
+@Configuration
+public class HttpSessionConfig {
+	@Bean
+    public static ConfigureRedisAction configureRedisAction() {
+        return ConfigureRedisAction.NO_OP;
+    }
+}
+
+```
+
 ## アプリケーションのプッシュ
 ```bash
 $ mvn clean package -DskipTests=true
