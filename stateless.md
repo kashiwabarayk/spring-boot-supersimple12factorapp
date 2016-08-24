@@ -51,7 +51,7 @@ public class PcfsampleappApplication {
 
 ## アプリケーションのプッシュ
 ```bash
-$ ./mvnw clean package
+$ mvn clean package -DskipTests=true
 $ cf push --nostart
 ```
 
