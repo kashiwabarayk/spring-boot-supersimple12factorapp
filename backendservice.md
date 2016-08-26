@@ -255,9 +255,13 @@ Auto Configuration機能を利用せずに明示的に環境変数から取得�
 ```bash
 $ cf set-env myapp-<name> JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}'
 $ cf set-env myapp-<name> SPRING_PROFILES_ACTIVE cloud # Auto 
+$ cf restage myapp-<name>
 ```
-
 Auto confgrationがオフになると設定ファイルから接続情報が取得されます。
+現在設定ファイルはからの状態なのでデフォルトでは`localhost`のRedisサーバにアクセスを試行します。
+そのため、設定ファイルなしだとアプリケーションの起動に失敗します。
+
+設定ファイルの環境変数から取得した値が利用されるようになったことがわかります。
 
 環境変数を読み込むための設定を`application.properties`ファイルに記載します。
 これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
@@ -272,22 +276,5 @@ $ mvn clean package -DskipTests=true
 ```bash
 $ cf push
 ```
-
-同じようにAPIにアクセスしてみましょう。
-
-## 念のため確認
-`JBP_CONFIG_SPRING_AUTO_RECONFIGURATION '{enabled: false}'` の設定をした状態で`application.properties`の接続情報を削除し、ビルド→プッシュしてみましょう。
-```properties
-#spring.redis.host=${vcap.services.redis-caching.credentials.host}
-#spring.redis.port=${vcap.services.redis-caching.credentials.port}
-#spring.redis.password=${vcap.services.redis-caching.credentials.password}
-```
-```bash
-$ mvn clean package -DskipTests=true
-```
-```bash
-$ cf push
-```
-デフォルトでは`localhost`のRedisサーバにアクセスを試行するため、設定ファイルなしだとアプリケーションの起動に失敗します。
-設定ファイルの環境変数から取得した値が利用されていることがわかります。
-※この演習後は「Auto-configrationを利用しない方法」の状態にアプリを戻してから次に進んで下さい。
+設定ファイルのRedisに接続し、アプリケーションが正常に起動しました。
+同じようにAPIにアクセスして動作を確認してみましょう。
