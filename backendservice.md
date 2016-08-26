@@ -258,9 +258,9 @@ $ cf set-env myapp-<name> SPRING_PROFILES_ACTIVE cloud # Auto
 $ cf restage myapp-<name>
 ```
 Auto confgrationがオフになると設定ファイルから接続情報が取得されます。
+
 現在設定ファイルはからの状態なのでデフォルトでは`localhost`のRedisサーバにアクセスを試行します。
 そのため、設定ファイルなしだとアプリケーションの起動に失敗します。
-
 設定ファイルの環境変数から取得した値が利用されるようになったことがわかります。
 
 環境変数を読み込むための設定を`application.properties`ファイルに記載します。
