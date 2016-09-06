@@ -36,7 +36,7 @@ $ curl -vvv http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/put
 < Content-Length: 19
 < Content-Type: text/plain;charset=UTF-8
 < Date: Fri, 19 Aug 2016 08:11:46 GMT
-< Set-Cookie: SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623;path=/;HttpOnly
+< Set-Cookie: *SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623*;path=/;HttpOnly
 < X-Vcap-Request-Id: ca0f3b26-4c30-4599-5481-f45ff10bf580
 <
 * Connection #0 to host myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io left intact
