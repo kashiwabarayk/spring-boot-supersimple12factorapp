@@ -21,7 +21,7 @@ Spring BootとPivotal Cloud Foundryの機能を使ってとてもシンプルな
 * ログインの確認
 
 ```bash
-cf login -a <API> --skip-ssl-validation
+$ cf login -a <API> --skip-ssl-validation
 ```
 
 # ハンズオン手順
