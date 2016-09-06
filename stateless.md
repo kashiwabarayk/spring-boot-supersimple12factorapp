@@ -7,6 +7,7 @@
 
 ## ソースコードの編集
 まずは依存関係を追加します。
+initial/pcfsample-initial/pom.xmlを以下のように編集します。
 ```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -18,6 +19,7 @@
 </dependency>
 ```
 次に以下のメソッドを追加します。
+src/main/java/com/example/pcfsample/PcfsampleappApplication.javaを以下のように編集します。
 ```java
 @RequestMapping("/put")
 String putSession(HttpSession session) {
@@ -37,6 +39,7 @@ String getSession(HttpSession session) {
 	}
 ```
 `<name>`に任意の名前を入力してください。
+※`javax.servlet.http.HttpSession`をインポート分に追加してください。
 
 また、以下のアノテーションを付与します。
 ```java
@@ -48,10 +51,20 @@ public class PcfsampleappApplication {
 // . . . 
 ```
 `@EnableRedisHttpSession`によってセッションがRedisに格納されます。
+※`org.springframework.cache.annotation.Cacheable`, 
+ `org.springframework.cache.annotation.EnableCaching`,
+ `org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession`
+をインポート分に追加してください。
 
 次に以下のHttpSessionConfigクラスを作成します。
 Spring SessionはRedisのconfigコマンドを使って初期化時にRedisの再設定を行いますが、PCFやAWSのRedisではconfigコマンドが無効化されていてエラーになってしまいます。そのため、Spring SessionがRedisのCONFIGを実行しないようコンフィグレーションを作成します。
+`/src/main/java/com/example/pcfsample/HttpSessionConfig.java`クラスを作成し、以下のメソッドを追加します。
 ```java
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.session.data.redis.config.ConfigureRedisAction;
+import org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession;
+
 @EnableRedisHttpSession
 @Configuration
 public class HttpSessionConfig {
@@ -65,8 +78,9 @@ public class HttpSessionConfig {
 
 ## アプリケーションのプッシュ
 ```bash
+$ cd spring-boot-supersimple12factorapp/initial/pcfsample-initial
 $ mvn clean package -DskipTests=true
-$ cf push --nostart
+$ cf push --no-start
 ```
 
 ## Redisインスタンスの作成とBind
@@ -78,6 +92,7 @@ $ cf env myapp-<name>
 $ cf start myapp-<name>
 ```
 Spring Bootにより、redis-sessionという名前のサービスがアプリケーションにBindされるとセッション情報がBindされているRedisに格納されるようになります。
+こちらは参考情報なのでソースコードに追記する必要はございません。
 ```java
  // ..
    @Autowired
@@ -93,7 +108,7 @@ spring.cloud.enabled=false
 
 それでは動作を確認してみましょう。
 ```bash
-$ curl -vvv http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/put
+$ curl -vvv http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/put
 curl -vvv -X PUT http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/put
 *   Trying 209.194.245.136...
 * Connected to myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io (209.194.245.136) port 80 (#0)
@@ -106,7 +121,7 @@ curl -vvv -X PUT http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/put
 < Content-Length: 19
 < Content-Type: text/plain;charset=UTF-8
 < Date: Fri, 19 Aug 2016 05:15:12 GMT
-< Set-Cookie: SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd;path=/;HttpOnly
+< Set-Cookie: SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd ;path=/;HttpOnly
 < X-Vcap-Request-Id: acec9403-a7c2-4d7e-65a3-09d7d2704550
 <
 * Connection #0 to host myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io left intact
@@ -154,6 +169,7 @@ public class HttpSessionConfig {
 //    }
 }
 ```
+`pom.xml`ファイル
 ```xml
 <!-- <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -166,7 +182,7 @@ public class HttpSessionConfig {
 ```
 
 ```bash
-$ cf mvn clean package -DskipTests=true
+$ mvn clean package -DskipTests=true
 $ cf push
 ```
 ```bash
@@ -176,3 +192,7 @@ $ cf restage myapp-tkaburagi
 Webブラウザから`put->get->kill->get`の順番でAPIを叩いてください。
 killでローカルのセッション情報が消えるため、2回目のgetでエラーが発生します。
 ※この演習が終わった後は「サービスをunbindした場合」の前の状態にアプリケーションを戻したから次に進んでください。
+
+* `PcfsampleappApplication`クラスのコメントアウトの削除
+* `HttpSessionConfig`クラスのコメントアウトの削除
+* `pom.xml`ファイルのコメントアウトの削除
