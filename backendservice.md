@@ -20,7 +20,7 @@ $ cd spring-boot-supersimple12factorapp/initial/pcfsample-initial
 ## プロジェクトの編集
 ※IDEにMavenプロジェクトとしてインポートしてしまうと便利です。
 
-pom.xmlに以下の依存関係を追加します。12 Factorでは依存関係はMavenやGradleなどを利用して明記しライブラリを取り込みます。
+`pom.xml`に以下の依存関係を追加します。12 Factorでは依存関係はMavenやGradleなどを利用して明記しライブラリを取り込みます。
 ここではRedisにデータをキャッシュするために必要なライブラリを指定します。
 ```xml
 <dependency>
@@ -33,7 +33,7 @@ pom.xmlに以下の依存関係を追加します。12 Factorでは依存関係�
 </dependency>
 ```
 
-次に、src/main/java/com/example/pcfsample/PcfsampleappApplication.javaを以下のように編集します。
+次に、`src/main/java/com/example/pcfsample/PcfsampleappApplication.java`を以下のように編集します。
 ```java
 package com.example.pcfsample;
 
@@ -83,7 +83,7 @@ public class PcfsampleappApplication {
 `@EnableCaching`アノテーションによってキャッシュ機能を有効化します。また、`@Cacheable`によりメソッドの結果をキャッシュデータとして格納します。また該当データはキャッシュから取得されるようになります。
 
 次に、PCFにデプロイするためのアプリケーションの定義情報を記入します。
-initial/pcfsample-initial/manifest.ymlを以下のように編集します。
+`initial/pcfsample-initial/manifest.yml`を以下のように編集します。
 ```yml
 ---
 applications:
@@ -265,7 +265,7 @@ Auto confgrationがオフになると設定ファイルから接続情報が取�
 
 環境変数を読み込むための設定を`application.properties`ファイルに記載します。
 これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
-initial/pcfsample-initial/src/main/resources/application.properties を以下のように編集します。
+`initial/pcfsample-initial/src/main/resources/application.properties` を以下のように編集します。
 ```properties
 spring.redis.host=${vcap.services.redis-caching.credentials.host}
 spring.redis.port=${vcap.services.redis-caching.credentials.port}
