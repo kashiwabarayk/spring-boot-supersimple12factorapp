@@ -196,7 +196,7 @@ $ cf restage myapp-tkaburagi
 ```
 Webブラウザから`put->get->kill->get`の順番でAPIを叩いてください。
 killでローカルのセッション情報が消えるため、2回目のgetでエラーが発生します。
-※この演習が終わった後は「サービスをunbindした場合」の前の状態にアプリケーションを戻したから次に進んでください。
+※この演習が終わった後は「サービスをunbindした場合」の前の状態にアプリケーションを戻してから次に進んでください。
 
 * `PcfsampleappApplication`クラスのコメントアウトの削除
 * `HttpSessionConfig`クラスのコメントアウトの削除
