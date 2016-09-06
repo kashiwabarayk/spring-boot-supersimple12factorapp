@@ -18,6 +18,11 @@ Spring BootとPivotal Cloud Foundryの機能を使ってとてもシンプルな
 * Java 8のインストール
 * git cliのインストール
 * cf cliのインストール
+* ログインの確認
+
+```bash
+cf login -a <API> --skip-ssl-validation
+```
 
 # ハンズオン手順
 1. [バックエンドサービスを利用する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/backendservice.md)
