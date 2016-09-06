@@ -6,7 +6,8 @@
 ここでは12Factorでのロギング方法を扱います。12Factorではログはファイル出力ではなく、ストリーミングイベントとして扱うことが推奨されています。これによりコンテナ対応やアプリケーションの廃棄容易性を確保することができます。
 
 ## ソースコードの編集
-Spring Bootのロガーの機能はすでに追加してあるspring-boot-starter-web内にあるためここではpom.xmlの編集は行いません。Javaのファイルを下記のように編集します。
+Spring Bootのロガーの機能はすでに追加してある`spring-boot-starter-web`内にあるためここでは`pom.xml`の編集は行いません。
+`/src/main/java/com/example/pcfsample/PcfsampleappApplication.java`を下記のように編集します。
 ```java
 public class PcfsampleappApplication {
 	private static final Logger logger = LoggerFactory.getLogger(PcfsampleappApplication.class);
