@@ -14,7 +14,7 @@
 $ git clone https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp.git
 ```
 ```bash
-$ cd initial/pcfsample-initial
+$ cd spring-boot-supersimple12factorapp/initial/pcfsample-initial
 ```
 
 ## プロジェクトの編集
