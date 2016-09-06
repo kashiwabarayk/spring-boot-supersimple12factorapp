@@ -59,7 +59,10 @@ public class PcfsampleappApplication {
 をインポート分に追加してください。
 
 次に以下のHttpSessionConfigクラスを作成します。
-Spring SessionはRedisのconfigコマンドを使って初期化時にRedisの再設定を行いますが、PCFやAWSのRedisではconfigコマンドが無効化されていてエラーになってしまいます。そのため、Spring SessionがRedisのCONFIGを実行しないようコンフィグレーションを作成します。
+
+Spring SessionはRedisのconfigコマンドを使って初期化時にRedisの再設定を行いますが、PCFやAWSのRedisではconfigコマンドが無効化されていてエラーになってしまいます。
+
+そのため、Spring SessionがRedisのCONFIGを実行しないようコンフィグレーションを作成します。
 `/src/main/java/com/example/pcfsample/HttpSessionConfig.java`クラスを作成し、以下のメソッドを追加します。
 ```java
 import org.springframework.context.annotation.Bean;
