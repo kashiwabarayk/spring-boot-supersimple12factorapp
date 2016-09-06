@@ -24,6 +24,8 @@ public class PcfsampleappApplication {
 ```
 Spring Bootではデフォルトで標準出力にログを出力します。
 
+※ `org.slf4j.Logger`, `org.slf4j.LoggerFactory` をインポート文に追加して下さい。
+
 ## アプリケーションのプッシュ
 ```bash
 $ mvn clean package -DskipTests=true
@@ -52,7 +54,7 @@ Output logs%
 PCFから収集されたログはAPI経由だけでなく、Syslogで外部に転送できます。Syslogに対応しているソフトウェアなら何でもできますがここでは無料でアカウントを作成できるPapertrailを利用します。
 Papertrailのアカウント後に取得できる<HOST:IP>をメモしてください。
 ```bash
-$ cf create-user-provided-service logdrainer -r <syslog-tls://<HOST:IP>>
+$ cf create-user-provided-service logdrainer -l <syslog-tls://<HOST:IP>>
 $ cf bind-service myapp-<name> logdrainer
 $ cf restage myapp-<name>
 $ cf env myapp-<name>
