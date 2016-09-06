@@ -9,6 +9,14 @@
 設定を外部から読み込むことで本番環境、開発環境やクラウドに対して可搬的なアプリケーションとなります。
 
 ## 準備
+以下のコマンドでPCF上にログインします。
+```bash
+$ cf login -a <API> --skip-ssl-validation
+#Username, Password, APIのURLは当日に配布します。
+```
+AppsManagerへの接続を確認します。以下のURLにWebブラウザからアクセスして下さい。
+`https://apps.<APP_DOMAIN>`
+
 以下のコマンドで本プロジェクトをコピーします。
 ```bash
 $ git clone https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp.git
