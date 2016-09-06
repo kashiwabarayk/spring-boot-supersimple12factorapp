@@ -113,44 +113,28 @@ spring.cloud.enabled=false
 
 それでは動作を確認してみましょう。
 ```bash
-$ curl -vvv http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/put
-curl -vvv -X PUT http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/put
-*   Trying 209.194.245.136...
-* Connected to myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io (209.194.245.136) port 80 (#0)
-> PUT /put HTTP/1.1
-> Host: myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io
-> User-Agent: curl/7.43.0
-> Accept: */*
->
-< HTTP/1.1 200 OK
-< Content-Length: 19
-< Content-Type: text/plain;charset=UTF-8
-< Date: Fri, 19 Aug 2016 05:15:12 GMT
+$ curl -vvv http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/put 2>&1 | grep Set-Cookie
 < Set-Cookie: SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd ;path=/;HttpOnly
-< X-Vcap-Request-Id: acec9403-a7c2-4d7e-65a3-09d7d2704550
-<
-* Connection #0 to host myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io left intact
-Generated a session%
 
-$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 tkaburagi 2016-08-19T05:26:41.478Z%
 ```
 セッション情報を取得できました。これがRedisに格納されていることを確認するためにアプリケーションを停止させます。
 ```bash
-$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/kill
-$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/kill
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 404 Not Found: Requested route ('myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io') does not exist.
 ```
 `System.exit(-1)`が実行されJVMが停止します。
 PCFのコンテナリカバリ機能によってアプリケーションが自動再起動されますのでしばらくしたら以下のコマンドを実行します。
 ```bash
-$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 tkaburagi 2016-08-19T05:26:41.478Z%
 ```
 再起動後もセッション情報が取得され、ローカルではなく外部にセッションが格納されていることがわかります。
 セッションを削除して再度試したい時は以下のコマンドを実行してください。
 ```bash
-$ curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/remove -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/remove -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 Removed sessions
 ```
 
@@ -191,8 +175,8 @@ $ mvn clean package -DskipTests=true
 $ cf push
 ```
 ```bash
-$ cf unbind-service myapp-tkaburagi redis-session
-$ cf restage myapp-tkaburagi
+$ cf unbind-service myapp-<name> redis-session
+$ cf restage myapp-<name>
 ```
 Webブラウザから`put->get->kill->get`の順番でAPIを叩いてください。
 killでローカルのセッション情報が消えるため、2回目のgetでエラーが発生します。
