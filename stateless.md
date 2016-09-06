@@ -7,7 +7,7 @@
 
 ## ソースコードの編集
 まずは依存関係を追加します。
-initial/pcfsample-initial/pom.xmlを以下のように編集します。
+`initial/pcfsample-initial/pom.xm`を以下のように編集します。
 ```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -19,7 +19,7 @@ initial/pcfsample-initial/pom.xmlを以下のように編集します。
 </dependency>
 ```
 次に以下のメソッドを追加します。
-src/main/java/com/example/pcfsample/PcfsampleappApplication.javaを以下のように編集します。
+`src/main/java/com/example/pcfsample/PcfsampleappApplication.java`を以下のように編集します。
 ```java
 @RequestMapping("/put")
 String putSession(HttpSession session) {
@@ -39,6 +39,7 @@ String getSession(HttpSession session) {
 	}
 ```
 `<name>`に任意の名前を入力してください。
+
 ※`javax.servlet.http.HttpSession`をインポート分に追加してください。
 
 また、以下のアノテーションを付与します。
@@ -51,6 +52,7 @@ public class PcfsampleappApplication {
 // . . . 
 ```
 `@EnableRedisHttpSession`によってセッションがRedisに格納されます。
+
 ※`org.springframework.cache.annotation.Cacheable`, 
  `org.springframework.cache.annotation.EnableCaching`,
  `org.springframework.session.data.redis.config.annotation.web.http.EnableRedisHttpSession`
