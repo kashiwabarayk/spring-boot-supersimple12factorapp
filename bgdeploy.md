@@ -52,7 +52,7 @@ Session: tkaburagi 2016-08-19T08:11:46.857Z%
 ## アプリケーションの更新
 以下のコマンドを実行しアプリケーションに毎秒アクセスします。
 ```bash
-$ while true; do curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/bgdemo -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623; echo; sleep 1;done
+$ while true; do curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623; echo; sleep 1;done
 ```
 
 ##アプリケーションのバージョンアップ
@@ -63,7 +63,7 @@ $ while true; do curl http://myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io/bgdem
 ```bash
 $ mvn clean package -DskipTests=true
 ```
-`application.yml`を以下のように編集します。
+`manifest.yml`を以下のように編集します。
 ```yml
 ---
 applications:
@@ -71,7 +71,7 @@ applications:
   host: myapp-tkaburagi-temp
   memory: 512M
   instances: 1
-  path: target/demo-0.0.1-SNAPSHOT.jar
+  path: target/demo-initial-0.0.1-SNAPSHOT.jar
   services:
    - redis-session
    - redis-caching
