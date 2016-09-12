@@ -18,6 +18,8 @@ Spring BootとPivotal Cloud Foundryの機能を使ってとてもシンプルな
 * Java 8のインストール
 * git cliのインストール
 * cf cliのインストール
+* Githubアカウントの作成
+* Papertrailアカウントの作成
 
 # ハンズオン手順
 1. [バックエンドサービスを利用する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/backendservice.md)
