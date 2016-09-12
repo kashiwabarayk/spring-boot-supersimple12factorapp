@@ -294,3 +294,8 @@ $ cf push
 ```
 設定ファイルのRedisに接続し、アプリケーションが正常に起動しました。
 同じようにAPIにアクセスして動作を確認してみましょう。
+```bash
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io
+
+Hello. It's 2016-08-15T08:46:16.745Z now.
+```
