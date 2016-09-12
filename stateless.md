@@ -121,7 +121,11 @@ tkaburagi 2016-08-19T05:26:41.478Z%
 セッション情報を取得できました。これがRedisに格納されていることを確認するためにアプリケーションを停止させます。
 ```bash
 $ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/kill
+
+502 Bad Gateway: Registered endpoint failed to handle the request.
+
 $ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+
 404 Not Found: Requested route ('myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io') does not exist.
 ```
 `System.exit(-1)`が実行されJVMが停止します。
