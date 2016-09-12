@@ -271,6 +271,12 @@ Auto confgrationがオフになると設定ファイルから接続情報が取�
 現在設定ファイルはからの状態なのでデフォルトでは`localhost`のRedisサーバにアクセスを試行します。
 そのため、設定ファイルなしだとアプリケーションの起動に失敗します。
 設定ファイルから取得した値が利用されるようになったことがわかります。
+```bash
+$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io
+
+{"timestamp":1473659004955,"status":500,"error":"Internal Server Error","exception":"org.springframework.data.redis.RedisConnectionFailureException","message":"Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool","path":"/"}%
+```
+
 
 環境変数を読み込むための設定を`application.properties`ファイルに記載します。
 これによりどの環境でもソースコードの変更なくアプリケーションが稼働します。
