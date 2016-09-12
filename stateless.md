@@ -7,7 +7,7 @@
 
 ## ソースコードの編集
 まずは依存関係を追加します。
-`initial/pcfsample-initial/pom.xm`を以下のように編集します。
+`initial/pcfsample-initial/pom.xm`を以下の依存関係を追加します。
 ```xml
 <dependency>
 	<groupId>org.springframework.boot</groupId>
@@ -18,8 +18,7 @@
 	<artifactId>spring-session</artifactId>
 </dependency>
 ```
-次に以下のメソッドを追加します。
-`src/main/java/com/example/pcfsample/PcfsampleappApplication.java`を以下のように編集します。
+次に`src/main/java/com/example/pcfsample/PcfsampleappApplication.java`に以下のメソッドを追加します。
 ```java
 @RequestMapping("/put")
 String putSession(HttpSession session) {
