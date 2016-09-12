@@ -185,6 +185,11 @@ $ cf unbind-service myapp-<name> redis-session
 $ cf restage myapp-<name>
 ```
 Webブラウザから`put->get->kill->get`の順番でAPIを叩いてください。
+![image](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/put.png)
+![image](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/get1.png)
+![image](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/kill.png)
+![image](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/get2.png)
+
 killでローカルのセッション情報が消えるため、2回目のgetでエラーが発生します。
 ※この演習が終わった後は「サービスをunbindした場合」の前の状態にアプリケーションを戻してから次に進んでください。
 
