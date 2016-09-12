@@ -43,8 +43,13 @@ $ while true; do curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/bg -b SE
 ##アプリケーションのバージョンアップ
 先ほどの`bgdemo`メソッドを以下のように編集します。
 ```java
+@RequestMapping("/bg")
+String bgdemo(HttpSession session) {
+	String sep = System.getProperty("line.separator");
 	return "Version: 2." + sep
-```
+		+ "Java Version: " + System.getProperty("java.version") + sep
+		+ "Session: " + session.getAttribute("username").toString();
+}```
 ```bash
 $ mvn clean package -DskipTests=true
 ```
