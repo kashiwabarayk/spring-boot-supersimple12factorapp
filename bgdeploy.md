@@ -49,7 +49,8 @@ String bgdemo(HttpSession session) {
 	return "Version: 2." + sep
 		+ "Java Version: " + System.getProperty("java.version") + sep
 		+ "Session: " + session.getAttribute("username").toString();
-}```
+}
+```
 ```bash
 $ mvn clean package -DskipTests=true
 ```
