@@ -35,7 +35,7 @@ Session: tkaburagi 2016-08-19T08:11:46.857Z%
 ```
 
 ## アプリケーションの更新
-以下のコマンドを実行しアプリケーションに毎秒アクセスします。
+別の端末を立ち上げ、以下のコマンドを実行しアプリケーションに毎秒アクセスします。
 ```bash
 $ while true; do curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623; echo; sleep 1;done
 ```
