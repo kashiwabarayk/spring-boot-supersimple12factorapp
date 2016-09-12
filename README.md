@@ -18,6 +18,7 @@ Spring BootとPivotal Cloud Foundryの機能を使ってとてもシンプルな
 * Java 8のインストール
 * git cliのインストール
 * cf cliのインストール
+* IDEのインストール(STSなど)
 * Githubアカウントの作成
 * Papertrailアカウントの作成
 
