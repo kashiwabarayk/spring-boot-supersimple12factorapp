@@ -112,30 +112,30 @@ spring.cloud.enabled=false
 
 それでは動作を確認してみましょう。
 ```bash
-$ curl -vvv http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/put 2>&1 | grep Set-Cookie
+$ curl -vvv http://myapp-<name>.<APP_DOMAIN>/put 2>&1 | grep Set-Cookie
 < Set-Cookie: SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd ;path=/;HttpOnly
 
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.<APP_DOMAIN>/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 tkaburagi 2016-08-19T05:26:41.478Z%
 ```
 セッション情報を取得できました。これがRedisに格納されていることを確認するためにアプリケーションを停止させます。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/kill
+$ curl http://myapp-<name>.<APP_DOMAIN>/kill
 502 Bad Gateway: Registered endpoint failed to handle the request.
 
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.<APP_DOMAIN>/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 404 Not Found: Requested route ('myapp-tkaburagi.cfapps.haas-42.pez.pivotal.io') does not exist.
 ```
 `System.exit(-1)`が実行されJVMが停止します。
 PCFのコンテナリカバリ機能によってアプリケーションが自動再起動されますのでしばらくしたら以下のコマンドを実行します。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.<APP_DOMAIN>/get -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 tkaburagi 2016-08-19T05:26:41.478Z%
 ```
 再起動後もセッション情報が取得され、ローカルではなく外部にセッションが格納されていることがわかります。
 セッションを削除して再度試したい時は以下のコマンドを実行してください。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/remove -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
+$ curl http://myapp-<name>.<APP_DOMAIN>/remove -b SESSION=c83680ac-45a7-450c-86df-876f8fcb9fcd
 Removed sessions
 ```
 
