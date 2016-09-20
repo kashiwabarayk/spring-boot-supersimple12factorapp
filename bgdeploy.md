@@ -24,11 +24,11 @@ $ cf push
 
 ##テスト
 ```bash 
-$ curl -vvv http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/put 2>&1 | grep Set-Cookie
+$ curl -vvv http://myapp-<name>.<APP_DOMAIN>/put 2>&1 | grep Set-Cookie
 < Set-Cookie: *SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623*;path=/;HttpOnly
 ```
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/bgdemo -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
+$ curl http://myapp-<name>.<APP_DOMAIN>/bgdemo -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
 Version: 1.
 Java Version: 1.8.0_91
 Session: tkaburagi 2016-08-19T08:11:46.857Z%
@@ -37,7 +37,7 @@ Session: tkaburagi 2016-08-19T08:11:46.857Z%
 ## アプリケーションの更新
 別の端末を立ち上げ、以下のコマンドを実行しアプリケーションに毎秒アクセスします。
 ```bash
-$ while true; do curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623; echo; sleep 1;done
+$ while true; do curl http://myapp-<name>.<APP_DOMAIN>/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623; echo; sleep 1;done
 ```
 
 ##アプリケーションのバージョンアップ
@@ -74,7 +74,7 @@ $ cf push
 ## 新しいアプリケーションの確認
 起動をしたら以下のコマンドで動作を確認します。
 ```bash
-$ curl http://myapp-<name>-temp.cfapps.haas-42.pez.pivotal.io/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
+$ curl http://myapp-<name>-temp.<APP_DOMAIN>/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
 Version: 2.
 Java Version: 1.8.0_91
 Session: tkaburagi 2016-08-19T08:11:46.857Z%
@@ -84,7 +84,7 @@ Session: tkaburagi 2016-08-19T08:11:46.857Z%
 それでは動作に問題ないことを確認してから本番のURLにマッピングを行います。
 別ターミナルで以下のコマンドを実行してください。
 ```bash
-cf map-route myapp-<name>-v2 cfapps.haas-42.pez.pivotal.io --hostname myapp-<name>
+cf map-route myapp-<name>-v2 <APP_DOMAIN> --hostname myapp-<name>
 ```
 curlで毎秒アクセスしている端末の出力結果にVerion 2のアプリケーションの結果が出力されています。
 ```console
@@ -109,7 +109,7 @@ Session: tkaburagi 2016-08-19T08:57:16.411Z
 ```
 次にVersion 1のアプリケーションを本番のURLから取り除きます。
 ```bash
-cf unmap-route myapp-<name> cfapps.haas-42.pez.pivotal.io --hostname myapp-<name>
+cf unmap-route myapp-<name> <APP_DOMAIN> --hostname myapp-<name>
 ```
 curlで毎秒アクセスしている端末の出力結果を確認します。
 ```console
@@ -132,7 +132,7 @@ Session: tkaburagi 2016-08-19T08:57:16.411Z
 Version 1のアプリケーションが負荷分散先から切り離され、ユーザからは見えない状態となります。
 あとは`-temp`をunmapし、旧バージョンのアプリケーションを削除するだけです。
 ```bash
-$ cf unmap-route myapp-<name>-v2 cfapps.haas-42.pez.pivotal.io --hostname myapp-<name>-temp
+$ cf unmap-route myapp-<name>-v2 <APP_DOMAIN> --hostname myapp-<name>-temp
 $ cf delete myapp-<name>
 
 Really delete the app myapp-tkaburagi?> y
