@@ -185,7 +185,7 @@ $ cf start myapp-<name>
 ```
 ## テスト
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io
+$ curl http://myapp-<name>.<APP_DOMAIN>
 
 Hello. It's 2016-08-15T08:46:16.745Z now.
 ```
@@ -272,7 +272,7 @@ Auto confgrationがオフになると設定ファイルから接続情報が取�
 そのため、設定ファイルなしだとアプリケーションの起動に失敗します。
 設定ファイルから取得した値が利用されるようになったことがわかります。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io
+$ curl http://myapp-<name>.<APP_DOMAIN>
 
 {"timestamp":1473659004955,"status":500,"error":"Internal Server Error","exception":"org.springframework.data.redis.RedisConnectionFailureException","message":"Cannot get Jedis connection; nested exception is redis.clients.jedis.exceptions.JedisConnectionException: Could not get a resource from the pool","path":"/"}%
 ```
@@ -295,7 +295,7 @@ $ cf push
 設定ファイルのRedisに接続し、アプリケーションが正常に起動しました。
 同じようにAPIにアクセスして動作を確認してみましょう。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io
+$ curl http://myapp-<name>.<APP_DOMAIN>
 
 Hello. It's 2016-08-15T08:46:16.745Z now.
 ```
