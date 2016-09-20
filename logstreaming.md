@@ -38,7 +38,7 @@ $ cf logs myapp-<name>
 ```
 別の端末を立ち上げ、以下のコマンドを実行します。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/logger
+$ curl http://myapp-<name>.<APP_DOMAIN>/logger
 Output logs%
 ```
 最初の端末に以下のログが出力されます。
@@ -79,7 +79,7 @@ System-Provided:
 
 次に、アプリケーションへHTTPリクエストし、Papertrailの出力結果を見ています。
 ```bash
-$ curl http://myapp-<name>.cfapps.haas-42.pez.pivotal.io/logger
+$ curl http://myapp-<name>.<APP_DOMAIN>/logger
 Output logs%
 ```
 
