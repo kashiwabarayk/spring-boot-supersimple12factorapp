@@ -1,5 +1,6 @@
 package com.example.pcfsample;
 
+import java.io.IOException;
 import java.time.OffsetDateTime;
 
 import javax.servlet.http.HttpSession;
@@ -15,6 +16,10 @@ import org.springframework.session.data.redis.config.annotation.web.http.EnableR
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootApplication
 @RestController
@@ -62,9 +67,20 @@ public class PcfsampleappApplication {
 		return "Output logs";
 	}
 
-	@RequestMapping("/bgdemo")
-	String bgdemo() {
-		return "Hello myapp. This is version 1. Java Version is " + System.getProperty("java.version");
+	@RequestMapping("/bg")
+	String bgdemo(HttpSession session) {
+		String sep = System.getProperty("line.separator");
+		return "Version: 4." + sep + 
+				"Java Version: " + System.getProperty("java.runtime.version") + sep + 
+				"Session: " + session.getAttribute("username").toString();
+	}
+
+	@RequestMapping("/scaleout")
+	String scaleout() throws JsonProcessingException, IOException {
+		String vcap = System.getenv("VCAP_APPLICATION");
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode vcap_app = mapper.readTree(vcap);
+		return vcap_app.get("instance_index").asText();
 	}
 
 	public static void main(String[] args) {
