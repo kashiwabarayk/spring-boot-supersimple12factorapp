@@ -27,3 +27,4 @@ Spring BootとPivotal Cloud Foundryの機能を使ってとてもシンプルな
 2. [HTTPセッションを外部に格納する](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/stateless.md)
 3. [ログをストリーミングイベントとして扱う](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/logstreaming.md)
 4. [Blue Greenデプロイする](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/bgdeploy.md)
+5. [アプリケーションをスケールアウトする](https://github.com/tkaburagi1214/spring-boot-supersimple12factorapp/blob/master/scaleout.md)
