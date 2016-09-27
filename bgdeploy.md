@@ -28,7 +28,7 @@ $ curl -vvv http://myapp-<name>.<APP_DOMAIN>/put 2>&1 | grep Set-Cookie
 < Set-Cookie: *SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623*;path=/;HttpOnly
 ```
 ```bash
-$ curl http://myapp-<name>.<APP_DOMAIN>/bgdemo -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
+$ curl http://myapp-<name>.<APP_DOMAIN>/bg -b SESSION=bb1b3a64-90c2-4760-b268-9225bbcdc623
 Version: 1.
 Java Version: 1.8.0_91
 Session: tkaburagi 2016-08-19T08:11:46.857Z%
