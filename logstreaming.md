@@ -53,7 +53,7 @@ Output logs%
 PCFから収集されたログはAPI経由だけでなく、Syslogで外部に転送できます。Syslogに対応しているソフトウェアなら何でもできますがここでは無料でアカウントを作成できるPapertrailを利用します。
 Papertrailのアカウント後に取得できる<HOST:IP>をメモしてください。
 ```bash
-$ cf create-user-provided-service logdrainer -l syslog-tls://<HOST:PORT>
+$ cf create-user-provided-service logdrainer -l syslog://<HOST:PORT>
 $ cf bind-service myapp-<name> logdrainer
 $ cf restage myapp-<name>
 $ cf env myapp-<name>
