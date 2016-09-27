@@ -45,7 +45,7 @@ buildpack: java-buildpack=v3.8.1-offline-https://github.com/cloudfoundry/java-bu
 
 別ターミナル(ターミナル②)を起動し、以下のコマンドを実行します。リクエストを受け付けているコンテナのインデックス番号が表示されます。
 ```console
-$ while true; do curl http://myapp-<name>.<APP_DOMAIN>/sacleout; echo; sleep 1;done
+$ while true; do curl http://myapp-<name>.<APP_DOMAIN>/scaleout; echo; sleep 1;done
 
 0
 0
