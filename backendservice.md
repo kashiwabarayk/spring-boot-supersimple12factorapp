@@ -11,7 +11,7 @@
 ## 準備
 以下のコマンドでPCF上にログインします。
 ```bash
-$ cf login -a <API> --skip-ssl-validation
+$ cf login -a <SYSTEM_DOMAIN> --skip-ssl-validation
 #Username, Password, APIのURLは当日に配布します。
 ```
 AppsManagerへの接続を確認します。以下のURLにWebブラウザからアクセスして下さい。
