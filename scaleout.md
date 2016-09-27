@@ -20,7 +20,7 @@ PCFを利用することで12Factorのアプリケーションの並行性を実
 ##アプリケーションのPush
 ```bash
 $ mvn package -DskipTests=true
-$ cf push
+$ cf push myapp-<name> --hostname=myapp-<name>
 ```
 
 ##アプリケーションのテスト
